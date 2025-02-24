@@ -1,0 +1,96 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    border: 0.1px solid rgb(216, 216, 216);
+    border-radius: 5px;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 10px;
+    height: 250px;
+    
+}
+
+.contents{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+.container .header{
+    background-color: rgb(216, 216, 216);
+    padding: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+.container .btn{
+    max-width: 50px;
+    height: 30px;
+    background-color: rgb(56, 65, 87);
+    color: white;
+    border: 0.5px solid rgb(216, 216, 216);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.container input{
+    height: 35px;
+    border: 0.5px solid rgb(216, 216, 216);
+}
+
+.container .last{
+    background-color: rgb(193, 255, 255);
+    border: 0.5px solid rgb(231, 231, 231);
+    border-radius: 5px;
+}
+.last p{
+    color: rgb(81, 151, 255);
+    padding-left: 10px;
+}
+.lasts .btn{
+    max-width: 175px;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.box-row{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    max-width: 100px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 0.5px solid rgb(216, 216, 216);
+    border-radius: 5px;
+}
+.first{
+    background-color: rgb(141, 141, 141);
+}
+.second{
+    background-color: rgb(123, 229, 243);
+}
+.third{
+    background-color: rgb(255, 69, 69);
+}
+ul{
+    list-style: none;
+    gap: 5px;
+}
+img{
+    border: 0.5px solid rgb(141, 141, 141);
+
+}
