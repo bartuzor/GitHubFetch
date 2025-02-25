@@ -18,7 +18,7 @@
             <p>
                 Bir kullanıcı adı girin ve kullanıcının bilgilerine ulaşın!
             </p>
-            <input type="text" placeholder="GitHub Kullanıcı Adı">
+            <input  class="input" id="name" type="text" placeholder="GitHub Kullanıcı Adı">
             <button class="btn">
                 Ara
             </button>
@@ -26,10 +26,11 @@
         </div>
 
 
-        <div class="container">
+        <div class="container users invisible">
+            <div class="contents">
             <div class="row">
                 <div class="col">
-                    <img src="/18466096.png" alt="">
+                    <img class="logo" src="" alt="">
                 </div>
                 <div class="col">
                     <h1>Teknasyon Teknoloji</h1>
@@ -46,8 +47,16 @@
                 </div>
             </div>
         </div>
+    </div>
 
+        <div class="container repos invisible">
+            <div class="contents">
+            <h2>En Son Repolar</h2>
+            <ul class="list">
 
+            </ul>
+        </div>
+    </div>
 
         <div class="container lasts">
             <div class="contents">
@@ -56,13 +65,13 @@
 
             </ul>
             <div class="last"><p>Bir arama kaydı bulunmamaktadır.</p></div>
-            <button class="btn">
+            <button class="btn delete">
                 Son Arananları Temizle
             </button>
             </div>
         </div>
     </div>
     
-    
+    <script src="assetes/script.js"></script>
 </body>
 </html>
