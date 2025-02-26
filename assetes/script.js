@@ -1,6 +1,6 @@
 const btnSearch = document.querySelector('.btn');
 const btnDelete = document.querySelector('.delete');
-const user =  document.querySelector('.users');
+const  a =  document.querySelector('.users');
 const repo = document.querySelector('.repos');
 let lastSearchs = [];
 
@@ -13,14 +13,15 @@ btnSearch.addEventListener('click', ()=>{
     JSON.parse(localStorage.getItem("lastSearchs")) || [];
     lastSearchs.push(name);
     localStorage.setItem("lastSearchs",JSON.stringify(lastSearchs));
-    user.classList.remove('invisible');
+    a.classList.remove('invisible');
     repo.classList.remove('invisible');
+
 });
 
 async function fetchData() {
-    const name = document.querySelector('#name').value;
+    const user = document.querySelector('#name').value;
     try{
-        const response = await fetch(`https://api.github.com/users/${name}`)
+        const response = await fetch(`https://api.github.com/users/${user}`)
         if(!response.ok){
             throw new Error("Could not fetch resource")
         }
@@ -45,12 +46,19 @@ async function fetchData() {
         console.error(error);
     }
     try{
-        const responseRepos = await fetch(`https://api.github.com/users/${name}/repos`)
+        const responseRepos = await fetch(`https://api.github.com/users/${user}/repos`)
         if(!responseRepos.ok){
             throw new Error("Couldnt fetch repos data");
         }
         const dataRepos = await responseRepos.json();
         console.log(dataRepos);
+        const repos =document.querySelector('.list-repos');
+        repos.innerHTML ="";
+        dataRepos.forEach(repo => {
+            listitem = document.createElement('li');
+            listitem.innerText = repo.name;
+            repos.appendChild(listitem);})
+        
     }
     catch(error){
         console.error(error);
