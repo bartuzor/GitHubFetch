@@ -1,4 +1,6 @@
-
+*{
+    font-family: "Roboto";
+}
 .container{
     display: flex;
     flex-direction: column;
@@ -27,7 +29,7 @@
 
 
 .container .btn{
-    max-width: 50px;
+    width: 50px;
     height: 30px;
     background-color: rgb(56, 65, 87);
     color: white;
@@ -52,6 +54,11 @@
 .lasts .btn{
     max-width: 175px;
 }
+.btn:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s ease-in-out;
+}
 .col{
     display: flex;
     flex-direction: column;
@@ -59,6 +66,8 @@
 .row{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .box-row{
     display: flex;
@@ -70,7 +79,7 @@
     align-items: center;
     justify-content: center;
     height: 25px;
-    max-width: 100px;
+    width: 100px;
     padding: 5px;
     margin-bottom: 10px;
     border: 0.5px solid rgb(216, 216, 216);
@@ -99,4 +108,20 @@ img{
 .logo{
     width: 200px;
     height: 200px;
+}
+.delete{
+    min-width: 150px;
+}
+.alert{
+    margin-left: 10px;
+    color: red;
+}
+.users .row{
+    justify-content:flex-start;
+    gap: 50px;
+}
+.lasts .row{
+    padding-left: 25px;
+    height: 50px;
+    border: 0.5px solid rgb(216, 216, 216);
 }
