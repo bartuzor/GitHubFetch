@@ -10,9 +10,7 @@ let lastSearchs = JSON.parse(localStorage.getItem("lastSearchs")) || [];
 localStorage.setItem("lastSearchs",JSON.stringify(lastSearchs));
     
 
-if(lastSearchs.length>0){
-    last.classList.add('invisible');
-}
+
 
 loadSearchs();
 btnSearch.addEventListener('click', ()=>{
@@ -39,11 +37,15 @@ btnDelete.addEventListener('click',()=>{
     localStorage.removeItem("lastSearchs");
     lastList.innerHTML="";
     last.classList.remove('invisible');
-
+    lastList.classList.add('invisible');
 })
 
 
 function loadSearchs(){
+    if(lastSearchs.length>0){
+        last.classList.add('invisible');
+        lastList.classList.remove('invisible');
+    }
     lastList.innerHTML="";
     lastSearchs.forEach(user=>{
         
@@ -53,7 +55,7 @@ function loadSearchs(){
         lastListLink.innerText=user;
         lastListLink.href="#";
         lastListLink.addEventListener('click',()=>{
-            fetchData(user)
+            fetchData(user);
             a.classList.remove('invisible');
             repo.classList.remove('invisible');
         });
@@ -62,15 +64,7 @@ function loadSearchs(){
     })
 }
 
-async function fetchData(user) {
-    const last = document.querySelector('.last');
-    try{
-        const response = await fetch(`https://api.github.com/users/${user}`)
-        if(!response.ok){
-            throw new Error("Could not fetch resource")
-        }
-        const data = await response.json();
-        console.log(data);
+function updateUser(data){
         const logo = document.querySelector('.logo');
         logo.src = data.avatar_url;
         const title = document.querySelector('.title');
@@ -86,7 +80,38 @@ async function fetchData(user) {
         const mail = document.querySelector('.i-mail');
         mail.innerHTML = data.email;
         last.classList.add('invisible');
-        
+}
+function updateRepos(dataRepos){
+    const repos =document.querySelector('.list-repos');
+    repos.innerHTML ="";
+    dataRepos.forEach(repo => {
+        listitem = document.createElement('div');
+        listitem.classList.add('row');
+        listitem.innerText = repo.name;
+        const container = document.createElement('div');
+        container.classList.add('box-row');
+        const box1 = document.createElement('div');
+        box1.classList.add('box','first');
+        box1.innerText ="Starlar: " +repo.watchers_count;
+        container.appendChild(box1);
+        const box2 = document.createElement('div');
+        box2.classList.add('box','second');
+        box2.innerText="Forklar: " + repo.forks_count;
+        container.appendChild(box2);
+        listitem.appendChild(container);
+        repos.appendChild(listitem);})    
+}
+
+async function fetchData(user) {
+    const last = document.querySelector('.last');
+    try{
+        const response = await fetch(`https://api.github.com/users/${user}`)
+        if(!response.ok){
+            throw new Error("Could not fetch resource")
+        }
+        const data = await response.json();
+        updateUser(data);
+                
     }
     catch(error){
         console.error(error);
@@ -96,27 +121,8 @@ async function fetchData(user) {
         if(!responseRepos.ok){
             throw new Error("Couldnt fetch repos data");
         }
-        const dataRepos = await responseRepos.json();
-        console.log(dataRepos);
-        const repos =document.querySelector('.list-repos');
-        repos.innerHTML ="";
-        dataRepos.forEach(repo => {
-            listitem = document.createElement('div');
-            listitem.classList.add('row');
-            listitem.innerText = repo.name;
-            const container = document.createElement('div');
-            container.classList.add('box-row');
-            const box1 = document.createElement('div');
-            box1.classList.add('box','first');
-            box1.innerText ="Starlar: " +repo.watchers_count;
-            container.appendChild(box1);
-            const box2 = document.createElement('div');
-            box2.classList.add('box','second');
-            box2.innerText="Forklar: " + repo.forks_count;
-            container.appendChild(box2);
-            listitem.appendChild(container);
-            repos.appendChild(listitem);})
-        
+        const dataRepos = await responseRepos.json(); 
+        updateRepos(dataRepos);       
     }
     catch(error){
         console.error(error);
