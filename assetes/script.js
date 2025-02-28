@@ -1,23 +1,31 @@
-const btnSearch = document.querySelector('.btn');
+const btnSearch = document.querySelector('.search');
 const btnDelete = document.querySelector('.delete');
 const  a =  document.querySelector('.users');
 const repo = document.querySelector('.repos');
 const alert = document.querySelector('.alert');
 const last = document.querySelector('.last');
 const lastList = document.querySelector('.list');
-let lastSearchs = [];
+let lastSearchs = JSON.parse(localStorage.getItem("lastSearchs")) || [];
 
 localStorage.setItem("lastSearchs",JSON.stringify(lastSearchs));
     
 
+if(lastSearchs.length>0){
+    last.classList.add('invisible');
+}
+
+loadSearchs();
 btnSearch.addEventListener('click', ()=>{
     const name = document.querySelector('#name').value;
     if(name.length >= 3){
     alert.classList.add('invisible');
-    fetchData();
+    fetchData(document.querySelector('#name').value);
     JSON.parse(localStorage.getItem("lastSearchs")) || [];
+    if(!lastSearchs.includes(name)){
     lastSearchs.push(name);
     localStorage.setItem("lastSearchs",JSON.stringify(lastSearchs));
+    loadSearchs();
+    }
     a.classList.remove('invisible');
     repo.classList.remove('invisible');
     }
@@ -27,13 +35,34 @@ btnSearch.addEventListener('click', ()=>{
 
 });
 btnDelete.addEventListener('click',()=>{
-
+    lastSearchs = [];
+    localStorage.removeItem("lastSearchs");
     lastList.innerHTML="";
+    last.classList.remove('invisible');
 
 })
 
-async function fetchData() {
-    const user = document.querySelector('#name').value;
+
+function loadSearchs(){
+    lastList.innerHTML="";
+    lastSearchs.forEach(user=>{
+        
+        lastListElement = document.createElement('div');
+        lastListElement.classList.add('row');
+        const lastListLink = document.createElement('a');
+        lastListLink.innerText=user;
+        lastListLink.href="#";
+        lastListLink.addEventListener('click',()=>{
+            fetchData(user)
+            a.classList.remove('invisible');
+            repo.classList.remove('invisible');
+        });
+        lastListElement.appendChild(lastListLink);
+        lastList.appendChild(lastListElement);
+    })
+}
+
+async function fetchData(user) {
     const last = document.querySelector('.last');
     try{
         const response = await fetch(`https://api.github.com/users/${user}`)
@@ -57,13 +86,6 @@ async function fetchData() {
         const mail = document.querySelector('.i-mail');
         mail.innerHTML = data.email;
         last.classList.add('invisible');
-        const lastList = document.querySelector('.list');
-        lastListElement = document.createElement('div');
-        lastListElement.classList.add('row');
-        lastListElement.innerHTML=user;
-        lastList.appendChild(lastListElement);
-        
-        
         
     }
     catch(error){
