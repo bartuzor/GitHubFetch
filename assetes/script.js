@@ -87,7 +87,11 @@ function updateRepos(dataRepos){
     dataRepos.forEach(repo => {
         listitem = document.createElement('div');
         listitem.classList.add('row');
-        listitem.innerText = repo.name;
+        const listItemLink = document.createElement('a');
+        listItemLink.innerHTML = repo.name;
+        listitem.appendChild(listItemLink);
+        listItemLink.href=`https://github.com/${repo.owner.login}/${repo.name}`;
+        listItemLink.target="_blank";
         const container = document.createElement('div');
         container.classList.add('box-row');
         const box1 = document.createElement('div');
