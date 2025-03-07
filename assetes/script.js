@@ -30,8 +30,17 @@ btnSearch.addEventListener('click', ()=>{
     else{
         alert.classList.remove('invisible');
     }
-
 });
+
+const input = document.getElementById('name');
+
+input.addEventListener('keydown',(event)=>{
+    if(event.key==='Enter'){
+        event.preventDefault();
+        btnSearch.click();
+    }
+})
+
 btnDelete.addEventListener('click',()=>{
     lastSearchs = [];
     localStorage.removeItem("lastSearchs");

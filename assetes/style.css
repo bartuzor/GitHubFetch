@@ -94,17 +94,21 @@
     
 }
 .first{
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(182, 182, 182);
+    color: white;
 }
 .second{
     background-color: rgb(123, 229, 243);
+    color: white;
 }
 .third{
     background-color: rgb(255, 69, 69);
+    color: white;
 }
 ul{
     list-style: none;
     gap: 5px;
+    padding-left: 0px;
 }
 img{
     border: 0.5px solid rgb(141, 141, 141);
@@ -142,4 +146,24 @@ img{
 .animation-end{
     opacity: 1;
     transform: translateY(0);
+}
+@media(max-width:716px){
+    *{
+        text-align: center;
+    }
+    .row{
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        border: 0.5px solid rgb(231, 231, 231);
+        gap: 15px;
+        padding: 15px;
+    }
+    .box-row{
+        gap: 10px;
+    }
+    .header{
+        justify-content: center;
+    }
 }
